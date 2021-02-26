@@ -1,0 +1,14 @@
+
+.idea/
+
+venv/*
+
+*.csv
+
+venv/bin/
+
+venv/lib/python3.8/site-packages/_distutils_hack/
+
+venv/lib/python3.8/site-packages/setuptools/
+
+venv/lib/python3.8/site-packages/setuptools-53.1.0.dist-info/
