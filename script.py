@@ -6,5 +6,6 @@ for dirName in os.listdir(pathToData):
     subDirectory = os.path.join(pathToData,dirName)
     # print(subDirectory)
     for fileName in os.listdir(subDirectory):
-      print(fileName)
+        if "street" in fileName or "stop-and-search" in fileName: 
+          print(fileName)
 
