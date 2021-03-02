@@ -13,6 +13,8 @@ def filesToMerge(dirPath, substringName):
 
 
 def mergeFiles(listOfFiles, target):
+    if len(listOfFiles) < 1:
+        return
     combined_csv_file_path = target
     combined_csv = pd.read_csv(listOfFiles[0])
     del listOfFiles[0]
@@ -26,15 +28,22 @@ def mergeFiles(listOfFiles, target):
 
 
 pathToDataDir = "/media/frezer02/7D3CDB1B28552965/Data/bert/"
-targetDir = pathToDataDir + "output/"
+targetDir = pathToDataDir + "output/police/"
 searchedType = "street.csv"
-dataDir = "police_test"
+dataDir = "police"
 dataDir=pathToDataDir + "/" + dataDir
 
+# merge files by month
 for dirName in os.listdir(dataDir):
     subDirectory = os.path.join(dataDir + "/" + dirName)
     listOfFilesToMerge = filesToMerge(subDirectory, searchedType)
-    mergeFiles(listOfFilesToMerge, targetDir + dirName + "-" + searchedType )
-
-listOfFilesToMerge = filesToMerge(targetDir,searchedType)
+    mergeFiles(listOfFilesToMerge, targetDir + "months/" + dirName + "-" + searchedType )
+    
+# # merge files by year
+for year in range(2010, 2021):
+    listOfFilesToMerge = filesToMerge(targetDir + "months/",str(year))
+    mergeFiles(listOfFilesToMerge, targetDir + "years/" + str(year) + "-" + searchedType)
+#
+# # merge files all files
+listOfFilesToMerge = filesToMerge(targetDir + "years/",searchedType)
 mergeFiles(listOfFilesToMerge, targetDir + searchedType)
